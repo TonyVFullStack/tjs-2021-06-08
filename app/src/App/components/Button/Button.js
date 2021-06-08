@@ -7,7 +7,8 @@ function Button(props) {
     return <button onClick={evt => {
         alert(`J'ai cliqué ` + evt.target.innerText);
         console.warn(evt);
-    }}
+        props.clickAction(evt.target.innerText);
+     }}
      className='Button'
      style={
          {
@@ -22,11 +23,15 @@ function Button(props) {
 
 Button.propTypes = {
     children:PropTypes.any.isRequired,
-    bgcolor:PropTypes.string.isRequired
+    bgcolor:PropTypes.string.isRequired,
+    clickAction:PropTypes.func.isRequired
 }
 
 Button.defaultProps = {
     bgcolor: 'aquamarine',
-    isItalic: true
+    isItalic: true,
+    clickAction: ()=>{
+        console.log('Default Prop : ');
+      }
 }
 export default Button;
