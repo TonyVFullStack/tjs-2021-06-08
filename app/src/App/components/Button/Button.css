@@ -1,0 +1,19 @@
+.Button{
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+    font-size: large;
+    font-weight: 900;
+    border: none;
+    background-color: tomato;
+    margin-left: 5px;
+}
+
+.Button *{
+    vertical-align: middle;
+}
+.Button img{
+    max-height: 48px;
+    max-width: 48px;
+}
