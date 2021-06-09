@@ -1,0 +1,7 @@
+.Flexlayout {
+    display: flex;
+}
+
+.Flexlayout>*:first-child {
+    flex-grow: 1;
+}
