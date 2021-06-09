@@ -21,3 +21,7 @@
 .clicked {
     box-shadow: 10px 10px 25px gray;
 }
+
+.disabled{
+    background-color: tomato;
+}

@@ -1,27 +1,35 @@
-import './App.css';
-import Button from './components/Button/Button'
-function App() {
-  let counter = 0;
-  return (
-    <div className="App">
-      Demat Breizh - {counter}
-      <hr/>
+import React from 'react';
+import Button from './components/Button/Button';
+
+/**
+ * Composant principale de notre application
+ */
+class App extends React.Component{
+  //counter = 0;
+
+  constructor(props){
+    super(props);
+    this.state={counter: 0, maChaine:'Hello'};
+  }
+
+  componentDidUpdate(){
+    console.log(arguments);
+    console.log(this.state);
+  }
+
+  render(){
+    return <div className="header">
+      {this.state.maChaine} Voici le compteur : {this.state.counter}
       <Button bgcolor="green" clickAction={argument=>{
-        counter++
-        console.log('Depuis App : ' + argument + ' compteur : ' + counter);
+        this.setState({counter: this.state.counter + 1});
+        console.log('Depuis App : ' + argument + ' compteur : ' + this.state.counter);
       }}>
         <img src="https://cdn1.iconfinder.com/data/icons/science-technology-outline/91/Science__Technology_23-256.png" alt ="click" />
         Hello
       </Button>
-      <Button bgcolor="tomato" isItalic={false}  clickAction={argument=>{
-        console.log('Depuis App 2 : ' + argument);
-      }}><h1>Benj</h1></Button>
-      <Button bgcolor="skyblue"  clickAction={argument=>{
-        console.log('Depuis App 3 : ' + argument);
-      }}>Vert</Button>
-      <Button title="test">Jaune</Button>
-    </div>
-  );
+    </div>;
+  }
 }
 
 export default App;
+
