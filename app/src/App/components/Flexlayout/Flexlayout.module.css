@@ -1,7 +1,16 @@
 .Flexlayout {
     display: flex;
+    height: 80vh;
+    vertical-align: middle;
 }
 
+.Flexlayout > div > svg {
+    height: 100%;
+}
+.Flexlayout > div:first-child {
+    width: 100%;
+    text-align: center;
+}
 .Flexlayout>*:first-child {
     flex-grow: 1;
 }
