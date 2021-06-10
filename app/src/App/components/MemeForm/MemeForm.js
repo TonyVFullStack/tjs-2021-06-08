@@ -2,27 +2,36 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styles from './MemeForm.module.css';
 import { REST_ADR_SRV } from '../../config/config';
+import store, { initialState, PUBLIC_ACTION_CURRENT, PUBLIC_ACTION_GLOBAL } from '../../store/store';
+import { useParams } from 'react-router';
 
 const MemeForm = (props) => {
-  const [state, setstate] = useState({titre: 'bla', x:10, y:20, text:'coucou', imageId: 1});
+  const [state, setstate] = useState(initialState.current);
+  const {id}=useParams();
 
   useEffect(() => {
-    props.onSubmit(state);
+    
+    console.log("useEffect Subscribe")
+    setstate(store.getState().meme.current);
+    store.subscribe(()=>{
+      setstate(store.getState().meme.current);
+    })
+  }, []);
+
+  useEffect(() => {
+    //props.onSubmit(state);
+    console.log("useEffect Dispatch")
+    store.dispatch({type:PUBLIC_ACTION_CURRENT.SET_CURRENT, value:state})
+    store.dispatch({type:PUBLIC_ACTION_GLOBAL.INITIAL_LOAD, value:''})
   }, [state]);
 
+  console.log(useParams());
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
       <form onSubmit={(evt)=>{
         // Cancel Refresh
         evt.preventDefault();
-        fetch(`${REST_ADR_SRV}/memes${state.id?'/'+state.id:''}`,{
-          headers:{
-            "Content-Type":"application/json"
-          },
-          method:(state.id?'PUT':'POST'),
-          body:JSON.stringify(state)
-        }).then(flux=>flux.json())
-        .then(obj=>{setstate(obj)});
+        store.dispatch({type:PUBLIC_ACTION_CURRENT.SAVE_CURRENT});
       }}>
         <label htmlFor="titre">Titre</label><br/><input onChange={evt => {
           setstate({...state, titre:evt.target.value})
@@ -63,11 +72,11 @@ const MemeForm = (props) => {
   );
 }
 
-MemeForm.propTypes = { 
-  onSubmit:PropTypes.func.isRequired,
-  images:PropTypes.array.isRequired
-};
+// MemeForm.propTypes = { 
+//   onSubmit:PropTypes.func.isRequired,
+//   images:PropTypes.array.isRequired
+// };
 
-MemeForm.defaultProps = {};
+// MemeForm.defaultProps = {};
 
 export default MemeForm;

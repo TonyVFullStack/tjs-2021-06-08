@@ -56,6 +56,64 @@
       "color": "#cf1717",
       "fontsize": 20,
       "id": 4
+    },
+    {
+      "current": {
+        "titre": "",
+        "x": 10,
+        "y": 10,
+        "text": "coucou",
+        "imageId": 1,
+        "fontsize": 10
+      },
+      "id": 5
+    },
+    {
+      "titre": "bonjour",
+      "x": 10,
+      "y": 10,
+      "text": "coucou",
+      "imageId": 2,
+      "fontsize": 10,
+      "id": 6
+    },
+    {
+      "titre": "Le Mont StMichel est en normandie",
+      "x": "45",
+      "y": 10,
+      "text": "coucou",
+      "imageId": 3,
+      "fontsize": 10,
+      "id": 7
+    },
+    {
+      "titre": "Il est en Normandie",
+      "x": "100",
+      "y": "100",
+      "text": "Mt St-Michel est en Normandie",
+      "imageId": 3,
+      "fontsize": 20,
+      "color": "#ff0000",
+      "id": 8
+    },
+    {
+      "titre": "TEst create",
+      "x": "50",
+      "y": "50",
+      "text": "coucou",
+      "imageId": 3,
+      "fontsize": 50,
+      "color": "#6b21b5",
+      "id": 9
+    },
+    {
+      "titre": "dfsf",
+      "x": 10,
+      "y": 10,
+      "text": "coucou",
+      "imageId": 1,
+      "fontsize": 100,
+      "id": 10
     }
   ],
   "config": {
