@@ -10,9 +10,13 @@ import Navbar from './components/Navbar/Navbar';
 import store, {initialState, globalInitialState} from './store/store'
 import {
   BrowserRouter as Router,
+  Link,
   Route,
-  Switch
+  Switch,
+  useHistory,
+  withRouter
 } from 'react-router-dom'
+import MemePreview from './components/MemePreview/MemePreview';
 
 /**
  * Composant principale de notre application
@@ -47,7 +51,7 @@ class App extends React.Component{
   }
 
   render(){
-    return <Router>
+    return <>
       <Header />
       <Navbar />
       <div className="App">
@@ -55,10 +59,12 @@ class App extends React.Component{
           <Route path="/" exact>Racine</Route>
           <Route path="/thumbnail">
           <FlowLayout>
-            {this.state.memes.map((elem,i)=><Memeviewer key={'meme-'+i} meme={{
+            {this.state.memes.map((elem,i)=>
+            <Link to={"/view/"+elem.id} ><Memeviewer key={'meme-'+i} meme={{
               ...elem,
               image: this.state.images.find(e => e.id === elem.imageId)
-            }} />)}
+            }} />
+            </Link>)}
           </FlowLayout>
           </Route>
           <Route path="/new">
@@ -79,16 +85,22 @@ class App extends React.Component{
               </MemeForm>
             </Flexlayout>
           </Route>
-
+          <Route path="/view/:memeId">
+            <Flexlayout>
+              <div>
+                <MemePreview></MemePreview>
+              </div>
+            </Flexlayout>
+          </Route>
         </Switch>
       </div>
       <Footer />
       
-    </Router>;
+    </>;
   }
 }
 
-export default App;
+export default withRouter(App);
 
 // {this.state.maChaine} Voici le compteur : {this.state.counter}
 // <Button bgcolor="green" clickAction={argument=>{
