@@ -3,14 +3,23 @@ import PropTypes from 'prop-types';
 import styles from './MemeForm.module.css';
 import { REST_ADR_SRV } from '../../config/config';
 import store, { initialState, PUBLIC_ACTION_CURRENT, PUBLIC_ACTION_GLOBAL } from '../../store/store';
-import { useParams } from 'react-router';
+import { useHistory, useLocation, useParams, withRouter } from 'react-router';
 
 const MemeForm = (props) => {
   const [state, setstate] = useState(initialState.current);
-  const {id}=useParams();
+  const memeId = props.match.params.memeId;
+  console.log('%c%s','color:tomato;font-size:45pt;', 'props withRouter charged');
+  console.log(props);
 
   useEffect(() => {
-    
+    if(undefined !== memeId)
+    {
+      store.dispatch({type:PUBLIC_ACTION_CURRENT.LOAD_CURRENT, value:memeId})
+    }}
+    , [memeId]);
+
+
+  useEffect(() => {
     console.log("useEffect Subscribe")
     setstate(store.getState().meme.current);
     store.subscribe(()=>{
@@ -79,4 +88,4 @@ const MemeForm = (props) => {
 
 // MemeForm.defaultProps = {};
 
-export default MemeForm;
+export default withRouter(MemeForm);
